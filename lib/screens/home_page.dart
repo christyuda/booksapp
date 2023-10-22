@@ -1,9 +1,9 @@
 import 'package:bookapps/constant/color_constant.dart';
 import 'package:bookapps/provider/book_providers.dart';
-import 'package:bookapps/widgets/book/bestselers_cell.dart';
-import 'package:bookapps/widgets/book/genres_cell.dart';
-import 'package:bookapps/widgets/book/recently_cell.dart';
-import 'package:bookapps/widgets/book/top_cell.dart';
+import 'package:bookapps/widgets/Book/bestselers_cell.dart';
+import 'package:bookapps/widgets/Book/genres_cell.dart';
+import 'package:bookapps/widgets/Book/recently_cell.dart';
+import 'package:bookapps/widgets/Book/top_cell.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

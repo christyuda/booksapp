@@ -1,18 +1,71 @@
+import 'package:bookapps/constant/color_constant.dart';
 import 'package:bookapps/models/book.dart';
+import 'package:bookapps/provider/book_providers.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_animated_button/flutter_animated_button.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
 // class BookDetailScreen extends StatelessWidget {
 //   final Book? book;
+
 //   BookDetailScreen({this.book});
 
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
 //       appBar: AppBar(
-//         title: Text("Detail Buku"),
+//         title: Text('Book Detail'),
 //       ),
-//       body: Center(
-//         child: Text("Halaman Detail Buku"),
+//       body: SingleChildScrollView(
+//         padding: EdgeInsets.all(16.0),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             Image.asset(
+//               book!.img,
+//               width: MediaQuery.of(context).size.width,
+//               height: 300.0,
+//               fit: BoxFit.cover,
+//             ),
+//             SizedBox(height: 16.0),
+//             Text(
+//               book!.name,
+//               style: TextStyle(
+//                 fontSize: 24.0,
+//                 fontWeight: FontWeight.bold,
+//               ),
+//             ),
+//             SizedBox(height: 8.0),
+//             Text(
+//               'Author: ${book!.author}',
+//               style: TextStyle(
+//                 fontSize: 18.0,
+//               ),
+//             ),
+//             SizedBox(height: 8.0),
+//             Text(
+//               'Rating: ${book!.rating}',
+//               style: TextStyle(
+//                 fontSize: 18.0,
+//               ),
+//             ),
+//             SizedBox(height: 16.0),
+//             Text(
+//               'Description: ',
+//               style: TextStyle(
+//                 fontSize: 20.0,
+//                 fontWeight: FontWeight.bold,
+//               ),
+//             ),
+//             Text(
+//               '${book!.description}',
+//               style: TextStyle(
+//                 fontSize: 20.0,
+//                 fontWeight: FontWeight.bold,
+//               ),
+//             ),
+//           ],
+//         ),
 //       ),
 //     );
 //   }
@@ -25,59 +78,192 @@ class BookDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final media = MediaQuery.of(context).size;
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Book Detail'),
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      bottomNavigationBar: Container(
+        margin: EdgeInsets.only(left: 25, right: 25, bottom: 25),
+        height: 60,
+        color: Colors.transparent,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Image.asset(
-              book!.img,
-              width: MediaQuery.of(context).size.width,
-              height: 300.0,
-              fit: BoxFit.cover,
-            ),
-            SizedBox(height: 16.0),
-            Text(
-              book!.name,
-              style: TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
+            Container(
+              width: media.width * 0.4,
+              child: AnimatedButton(
+                selectedTextColor: Colors.black,
+                transitionType: TransitionType.RIGHT_TOP_ROUNDER,
+                animationDuration: Duration(milliseconds: 450),
+                text: 'Baca Buku',
+                textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                isReverse: true,
+                backgroundColor: Colors.orange,
+                borderRadius: 20,
+                borderWidth: 2,
+                borderColor: TColor.primaryLight,
+                onPress: () {},
               ),
             ),
-            SizedBox(height: 8.0),
-            Text(
-              'Author: ${book!.author}',
-              style: TextStyle(
-                fontSize: 18.0,
-              ),
-            ),
-            SizedBox(height: 8.0),
-            Text(
-              'Rating: ${book!.rating}',
-              style: TextStyle(
-                fontSize: 18.0,
-              ),
-            ),
-            SizedBox(height: 16.0),
-            Text(
-              'Description:',
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              // Tambahkan deskripsi buku di sini
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer varius justo nec urna volutpat, eu vulputate sapien malesuada. Proin tincidunt eros vitae ultrices. Phasellus eu libero vitae lectus malesuada laoreet non eget neque.',
-              style: TextStyle(
-                fontSize: 18.0,
+            Container(
+              width: media.width * 0.4,
+              child: AnimatedButton(
+                selectedTextColor: Colors.black,
+                transitionType: TransitionType.RIGHT_TOP_ROUNDER,
+                animationDuration: Duration(milliseconds: 450),
+                text: 'Simpan Buku',
+                textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                isReverse: true,
+                backgroundColor: Colors.orange,
+                borderRadius: 20,
+                borderWidth: 2,
+                borderColor: TColor.primaryLight,
+                onPress: () {},
               ),
             ),
           ],
+        ),
+      ),
+      body: SafeArea(
+        child: Container(
+          child: CustomScrollView(
+            slivers: <Widget>[
+              SliverAppBar(
+                backgroundColor: Colors.blueGrey,
+                expandedHeight: media.height * 0.5,
+                flexibleSpace: Container(
+                  color: Colors.orangeAccent,
+                  height: media.height * 0.5,
+                  child: Stack(
+                    children: <Widget>[
+                      Positioned(
+                        left: 25,
+                        top: 35,
+                        child: GestureDetector(
+                          onTap: () {
+                            // Navigator.pop(context);
+                          },
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          margin: EdgeInsets.only(bottom: 62, top: 62),
+                          width: media.width * 0.8,
+                          height: media.height * 0.8,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            image: DecorationImage(
+                              image: AssetImage(book!.img),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    Padding(
+                      padding: EdgeInsets.only(top: 24, left: 25),
+                      child: Text(
+                        book!.name,
+                        style: GoogleFonts.openSans(
+                            fontSize: 27,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 7, left: 25),
+                      child: Text(
+                        book!.author,
+                        style: GoogleFonts.openSans(
+                            fontSize: 14,
+                            color: Colors.deepOrange,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 7, left: 22),
+                      child: Row(
+                        children: <Widget>[
+                          IgnorePointer(
+                            ignoring: true,
+                            child: RatingBar.builder(
+                              initialRating: book!.rating,
+                              minRating: 1,
+                              direction: Axis.horizontal,
+                              allowHalfRating: true,
+                              itemCount: 5,
+                              itemSize: 15,
+                              itemPadding:
+                                  const EdgeInsets.symmetric(horizontal: 1.0),
+                              itemBuilder: (context, _) => Icon(
+                                Icons.star,
+                                color: Colors.deepOrange,
+                              ),
+                              onRatingUpdate: (rating) {},
+                            ),
+                          ),
+                          SizedBox(
+                            width: 4,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 28,
+                      margin: EdgeInsets.only(top: 23, bottom: 36),
+                      padding: EdgeInsets.only(left: 25),
+                      child: DefaultTabController(
+                        length: 2,
+                        child: TabBar(
+                          labelColor: Colors.white,
+                          isScrollable: true,
+                          indicatorPadding: EdgeInsets.all(0),
+                          unselectedLabelColor: Colors.grey,
+                          labelStyle: GoogleFonts.openSans(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          indicator: ShapeDecoration(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(20),
+                                  topLeft: Radius.circular(20),
+                                ),
+                              ),
+                              color: Colors.deepOrangeAccent),
+                          tabs: [
+                            Tab(
+                              child: Container(
+                                margin: EdgeInsets.only(right: 20),
+                                child: Text('Description'),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 25, bottom: 25, right: 25),
+                      child: Text(
+                        book!.description,
+                        style: GoogleFonts.openSans(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.grey,
+                            letterSpacing: .2,
+                            height: 2),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

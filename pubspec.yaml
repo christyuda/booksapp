@@ -39,6 +39,8 @@ dependencies:
   flashy_tab_bar2: ^0.0.6
   carousel_slider: ^4.2.1
   flutter_rating_bar: ^4.0.1
+  flutter_animated_button: ^2.0.3
+  google_fonts: ^6.1.0
 
 dev_dependencies:
   flutter_test:
