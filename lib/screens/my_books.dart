@@ -13,7 +13,7 @@ class MyBooksScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Books"),
+        title: Text("Koleksi Buku"),
       ),
       body: SafeArea(
         child: Column(
