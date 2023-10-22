@@ -2,6 +2,12 @@ import 'package:bookapps/models/book.dart';
 import 'package:flutter/material.dart';
 
 class BookProvider extends ChangeNotifier {
+  List<Book> savedBooks = [];
+  void addToReadingList(Book book) {
+    savedBooks.add(book);
+    notifyListeners();
+  }
+
   List<Book> topPicksArr = [
     Book(
       name: "The Dissapearance of Emila Zola",

@@ -5,71 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
-// class BookDetailScreen extends StatelessWidget {
-//   final Book? book;
-
-//   BookDetailScreen({this.book});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Book Detail'),
-//       ),
-//       body: SingleChildScrollView(
-//         padding: EdgeInsets.all(16.0),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             Image.asset(
-//               book!.img,
-//               width: MediaQuery.of(context).size.width,
-//               height: 300.0,
-//               fit: BoxFit.cover,
-//             ),
-//             SizedBox(height: 16.0),
-//             Text(
-//               book!.name,
-//               style: TextStyle(
-//                 fontSize: 24.0,
-//                 fontWeight: FontWeight.bold,
-//               ),
-//             ),
-//             SizedBox(height: 8.0),
-//             Text(
-//               'Author: ${book!.author}',
-//               style: TextStyle(
-//                 fontSize: 18.0,
-//               ),
-//             ),
-//             SizedBox(height: 8.0),
-//             Text(
-//               'Rating: ${book!.rating}',
-//               style: TextStyle(
-//                 fontSize: 18.0,
-//               ),
-//             ),
-//             SizedBox(height: 16.0),
-//             Text(
-//               'Description: ',
-//               style: TextStyle(
-//                 fontSize: 20.0,
-//                 fontWeight: FontWeight.bold,
-//               ),
-//             ),
-//             Text(
-//               '${book!.description}',
-//               style: TextStyle(
-//                 fontSize: 20.0,
-//                 fontWeight: FontWeight.bold,
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+import 'package:provider/provider.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 class BookDetailScreen extends StatelessWidget {
   final Book? book;
@@ -117,7 +55,17 @@ class BookDetailScreen extends StatelessWidget {
                 borderRadius: 20,
                 borderWidth: 2,
                 borderColor: TColor.primaryLight,
-                onPress: () {},
+                onPress: () {
+                  QuickAlert.show(
+                    // Menampilkan QuickAlert
+                    context: context,
+                    type: QuickAlertType.success,
+                    text: 'Transaction Completed Successfully!',
+                  );
+                  final bookProvider =
+                      Provider.of<BookProvider>(context, listen: false);
+                  bookProvider.addToReadingList(book!);
+                },
               ),
             ),
           ],
@@ -131,7 +79,7 @@ class BookDetailScreen extends StatelessWidget {
                 backgroundColor: Colors.blueGrey,
                 expandedHeight: media.height * 0.5,
                 flexibleSpace: Container(
-                  color: Colors.orangeAccent,
+                  color: Colors.transparent,
                   height: media.height * 0.5,
                   child: Stack(
                     children: <Widget>[
