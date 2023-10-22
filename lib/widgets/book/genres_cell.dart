@@ -37,7 +37,7 @@ class GenresCell extends StatelessWidget {
             maxLines: 3,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.white,
+              color: TColor.textGenre,
               fontSize: 15,
               fontWeight: FontWeight.w700,
             ),

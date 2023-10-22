@@ -8,6 +8,7 @@ class TColor {
   static final Color bg = const Color(0xFFcfdee7);
   static final Color dekorasi = const Color(0xFF5e7ce2);
   static final Color judulBesar = const Color(0xFF1d3449);
+  static final Color textGenre = const Color(0xFF1d3449);
 
   // static List<Color> get button => const [
   //       Color(0xff5ABD8C),

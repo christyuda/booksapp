@@ -1,5 +1,4 @@
 import 'package:bookapps/constant/color_constant.dart';
-import 'package:bookapps/models/book.dart';
 import 'package:bookapps/provider/book_providers.dart';
 import 'package:bookapps/widgets/book/bestselers_cell.dart';
 import 'package:bookapps/widgets/book/genres_cell.dart';
