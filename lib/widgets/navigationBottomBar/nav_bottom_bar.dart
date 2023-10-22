@@ -21,7 +21,7 @@ Widget buildBottomNavigationBar(BuildContext context) {
         title: Text('Home'),
       ),
       FlashyTabBarItem(
-        icon: Icon(Icons.home),
+        icon: Icon(Icons.book),
         title: Text('Books'),
       ),
       FlashyTabBarItem(

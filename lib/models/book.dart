@@ -1,9 +1,13 @@
 class Book {
-  final String title;
+  final String name;
   final String author;
-  final String description;
-  final String imageUrl;
-  final String category;
+  final String img;
+  final double? rating;
 
-  Book(this.title, this.author, this.description, this.imageUrl, this.category);
+  Book({
+    required this.name,
+    required this.author,
+    required this.img,
+    this.rating,
+  });
 }

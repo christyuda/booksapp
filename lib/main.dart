@@ -1,4 +1,5 @@
 import 'package:bookapps/provider/book_providers.dart';
+import 'package:bookapps/provider/menu_provider.dart';
 import 'package:bookapps/provider/navigation_provider.dart';
 import 'package:bookapps/routes/app_routes.dart';
 import 'package:bookapps/screens/book_detail.dart';
@@ -22,7 +23,10 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<NavigationProvider>(
           create: (context) => NavigationProvider(),
-        )
+        ),
+        ChangeNotifierProvider<MenuProvider>(
+          create: (context) => MenuProvider(),
+        ),
       ],
       child: MaterialApp(
         title: 'Buku ku',

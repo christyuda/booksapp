@@ -1,45 +1,85 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:bookapps/models/book.dart';
+import 'package:flutter/material.dart';
 
-class BookProvider with ChangeNotifier {
-  List<Book> _books = [
+class BookProvider extends ChangeNotifier {
+  List<Book> topPicksArr = [
     Book(
-        "Book 1",
-        "Author 1",
-        "Description 1",
-        "https://cdn.gramedia.com/uploads/items/9781473692435-the_book_of_two_ways.jpg",
-        "kategori1"),
+      name: "The Dissapearance of Emila Zola",
+      author: "Michael Rosen",
+      img: "assets/img/1.jpg",
+    ),
     Book(
-        "Book 2",
-        "Author 2",
-        "Description 2",
-        "https://cdn.gramedia.com/uploads/items/9781473692435-the_book_of_two_ways.jpg",
-        "kategori2"),
+      name: "Fatherhood",
+      author: "Michael Rosen",
+      img: "assets/img/2.jpg",
+    ),
     Book(
-        "Book 3",
-        "Author 3",
-        "Description 3",
-        "https://cdn.gramedia.com/uploads/items/9781473692435-the_book_of_two_ways.jpg",
-        "kategori3"),
-    Book(
-        "Book 4",
-        "Author 4",
-        "Description 4",
-        "https://cdn.gramedia.com/uploads/items/9781473692435-the_book_of_two_ways.jpg",
-        "kategori3"),
-    Book(
-        "Book 5",
-        "Author 5",
-        "Description 5",
-        "https://cdn.gramedia.com/uploads/items/9781473692435-the_book_of_two_ways.jpg",
-        "kategori5"),
+        name: "The Time Travellers Handbook",
+        author: "Stride Lottie",
+        img: "assets/img/3.jpg")
   ];
 
-  List<Book> get books => _books;
+  List<Book> bestArr = [
+    Book(
+      name: "Fatherhood",
+      author: "by Christopher Wilson",
+      img: "assets/img/4.jpg",
+      rating: 4.0,
+    ),
+    Book(
+      name: "Fatherhood",
+      author: "by Christopher Wilson",
+      img: "assets/img/4.jpg",
+      rating: 4.0,
+    ),
+    Book(
+      name: "Fatherhood",
+      author: "by Christopher Wilson",
+      img: "assets/img/4.jpg",
+      rating: 4.0,
+    ),
+    Book(
+      name: "Fatherhood",
+      author: "by Christopher Wilson",
+      img: "assets/img/4.jpg",
+      rating: 4.0,
+    ),
+    Book(
+      name: "Fatherhood",
+      author: "by Christopher Wilson",
+      img: "assets/img/4.jpg",
+      rating: 4.0,
+    ),
+  ];
 
-  void addBook(Book book) {
-    _books.add(book);
-    notifyListeners();
-  }
+  List<Book> genresArr = [
+    Book(
+      name: "Graphic Novels",
+      img: "assets/img/g1.png",
+      author: 'by Jake Arnott',
+    ),
+    Book(
+      name: "Graphic Novels",
+      img: "assets/img/g1.png",
+      author: 'by Jake Arnott',
+    ),
+  ];
+
+  List<Book> recentArr = [
+    Book(
+      name: "The Fatal Tree",
+      author: "by Jake Arnott",
+      img: "assets/img/10.jpg",
+    ),
+    Book(
+      name: "The Fatal Tree",
+      author: "by Jake Arnott",
+      img: "assets/img/11.jpg",
+    ),
+    Book(
+      name: "The Fatal Tree",
+      author: "by Jake Arnott",
+      img: "assets/img/12.jpg",
+    ),
+  ];
 }
