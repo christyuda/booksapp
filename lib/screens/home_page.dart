@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bookapps/constant/color_constant.dart';
 import 'package:bookapps/provider/book_providers.dart';
 import 'package:bookapps/widgets/Book/bestselers_cell.dart';
@@ -13,8 +15,15 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bookProvider = Provider.of<BookProvider>(context);
+    final bookProvider = Provider.of<BookProvider>(context, listen: false);
     final media = MediaQuery.of(context).size;
+
+    Future<void> fetchData() async {
+      await bookProvider.fetchBooks();
+    }
+
+    fetchData();
+
     return Scaffold(
       backgroundColor: TColor.bg,
       body: SingleChildScrollView(
@@ -60,14 +69,14 @@ class MainPage extends StatelessWidget {
                           )
                         ],
                       ),
-                      leading: Container(),
-                      leadingWidth: 1,
-                      actions: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.menu),
-                        ),
-                      ],
+                      // leading: Container(),
+                      // leadingWidth: 1,
+                      // actions: [
+                      //   IconButton(
+                      //     onPressed: () {},
+                      //     icon: const Icon(Icons.menu),
+                      //   ),
+                      // ],
                     ),
                     SizedBox(
                       width: media.width,
@@ -76,8 +85,13 @@ class MainPage extends StatelessWidget {
                         itemCount: bookProvider.topPicksArr.length,
                         itemBuilder: (BuildContext context, int itemIndex,
                             int pageViewIndex) {
-                          final book = bookProvider.topPicksArr[itemIndex];
-                          return TopPicksCell(book: book);
+                          if (itemIndex >= 0 &&
+                              itemIndex < bookProvider.topPicksArr.length) {
+                            final book = bookProvider.topPicksArr[itemIndex];
+                            return TopPicksCell(book: book);
+                          } else {
+                            return CircularProgressIndicator(); // Tampilan pengganti jika indeks tidak valid
+                          }
                         },
                         options: CarouselOptions(
                           autoPlay: false,
@@ -142,7 +156,7 @@ class MainPage extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             vertical: 15, horizontal: 8),
                         scrollDirection: Axis.horizontal,
-                        itemCount: bookProvider.genresArr.length,
+                        itemCount: min(5, bookProvider.genresArr.length),
                         itemBuilder: (context, index) {
                           var book = bookProvider.genresArr[index];
                           return GenresCell(
@@ -179,7 +193,7 @@ class MainPage extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             vertical: 15, horizontal: 8),
                         scrollDirection: Axis.horizontal,
-                        itemCount: bookProvider.recentArr.length,
+                        itemCount: min(5, bookProvider.recentArr.length),
                         itemBuilder: (context, index) {
                           var book = bookProvider.recentArr[index];
                           return RecentlyCell(book: book);

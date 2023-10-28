@@ -1,6 +1,7 @@
 import 'package:bookapps/constant/color_constant.dart';
 import 'package:bookapps/models/book.dart';
 import 'package:bookapps/screens/book_detail.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class TopPicksCell extends StatelessWidget {
@@ -41,8 +42,8 @@ class TopPicksCell extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  book.img,
+                child: CachedNetworkImage(
+                  imageUrl: book.thumbnail,
                   width: media.width * 0.32,
                   height: media.width * 0.50,
                   fit: BoxFit.cover,
@@ -53,7 +54,7 @@ class TopPicksCell extends StatelessWidget {
               height: 15,
             ),
             Text(
-              book.name,
+              book.title,
               maxLines: 3,
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -63,7 +64,7 @@ class TopPicksCell extends StatelessWidget {
               ),
             ),
             Text(
-              book.author,
+              book.authors.toString(),
               maxLines: 1,
               textAlign: TextAlign.center,
               style: TextStyle(

@@ -1,6 +1,7 @@
 import 'package:bookapps/constant/color_constant.dart';
 import 'package:bookapps/models/book.dart';
 import 'package:bookapps/provider/book_providers.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -101,7 +102,8 @@ class BookDetailScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             image: DecorationImage(
-                              image: AssetImage(book!.img),
+                              image:
+                                  CachedNetworkImageProvider(book!.thumbnail),
                             ),
                           ),
                         ),
@@ -116,7 +118,7 @@ class BookDetailScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 24, left: 25),
                       child: Text(
-                        book!.name,
+                        book!.title,
                         style: GoogleFonts.openSans(
                             fontSize: 27,
                             color: Colors.black,
@@ -126,41 +128,35 @@ class BookDetailScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 7, left: 25),
                       child: Text(
-                        book!.author,
+                        book!.authors.toString(),
                         style: GoogleFonts.openSans(
                             fontSize: 14,
                             color: Colors.deepOrange,
                             fontWeight: FontWeight.w400),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 7, left: 22),
-                      child: Row(
-                        children: <Widget>[
-                          IgnorePointer(
-                            ignoring: true,
-                            child: RatingBar.builder(
-                              initialRating: book!.rating,
-                              minRating: 1,
-                              direction: Axis.horizontal,
-                              allowHalfRating: true,
-                              itemCount: 5,
-                              itemSize: 15,
-                              itemPadding:
-                                  const EdgeInsets.symmetric(horizontal: 1.0),
-                              itemBuilder: (context, _) => Icon(
-                                Icons.star,
-                                color: Colors.deepOrange,
-                              ),
-                              onRatingUpdate: (rating) {},
-                            ),
-                          ),
-                          SizedBox(
-                            width: 4,
-                          ),
-                        ],
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: EdgeInsets.only(top: 7, left: 22),
+                    //   child: Row(
+                    //     children: <Widget>[
+                    //       RatingBar.builder(
+                    //         initialRating: book!.averageRating ?? 1.0,
+                    //         minRating: 1,
+                    //         direction: Axis.horizontal,
+                    //         allowHalfRating: true,
+                    //         itemCount: 5,
+                    //         itemSize: 15,
+                    //         itemPadding:
+                    //             const EdgeInsets.symmetric(horizontal: 1.0),
+                    //         itemBuilder: (context, _) => Icon(Icons.star),
+                    //         onRatingUpdate: (rating) {},
+                    //       ),
+                    //       SizedBox(
+                    //         width: 4,
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                     Container(
                       height: 28,
                       margin: EdgeInsets.only(top: 23, bottom: 36),

@@ -1,5 +1,6 @@
 import 'package:bookapps/constant/color_constant.dart';
 import 'package:bookapps/models/book.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class GenresCell extends StatelessWidget {
@@ -23,17 +24,17 @@ class GenresCell extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
-            book.img,
+          CachedNetworkImage(
+            imageUrl: book.thumbnail,
             width: media.width * 0.7,
-            height: media.width * 0.35,
+            height: media.width * 0.25,
             fit: BoxFit.fitWidth,
           ),
           const SizedBox(
-            height: 20,
+            height: 15,
           ),
           Text(
-            book.name,
+            book.categories.toString(),
             maxLines: 3,
             textAlign: TextAlign.center,
             style: TextStyle(
