@@ -1,6 +1,7 @@
 import 'package:bookapps/constant/color_constant.dart';
 import 'package:bookapps/models/book.dart';
 import 'package:bookapps/screens/book_detail.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -42,8 +43,8 @@ class BestSellerCell extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  book.img,
+                child: CachedNetworkImage(
+                  imageUrl: book.thumbnail,
                   width: media.width * 0.32,
                   height: media.width * 0.55,
                   fit: BoxFit.cover,
@@ -54,12 +55,12 @@ class BestSellerCell extends StatelessWidget {
               height: 15,
             ),
             Text(
-              book.name,
+              book.title,
               maxLines: 3,
               textAlign: TextAlign.left,
               style: TextStyle(
                 color: TColor.text,
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -67,7 +68,7 @@ class BestSellerCell extends StatelessWidget {
               height: 6,
             ),
             Text(
-              book.author,
+              book.authors.toString(),
               maxLines: 1,
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -76,18 +77,16 @@ class BestSellerCell extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 7),
-            IgnorePointer(
-              ignoring: true,
-              child: RatingBar.builder(
-                  initialRating: book.rating ?? 1.0,
-                  minRating: 1,
-                  direction: Axis.horizontal,
-                  allowHalfRating: true,
-                  itemCount: 5,
-                  itemSize: 15,
-                  itemPadding: const EdgeInsets.symmetric(horizontal: 1.0),
-                  itemBuilder: (context, _) => Icon(Icons.star),
-                  onRatingUpdate: (rating) {}),
+            RatingBar.builder(
+              initialRating: book.averageRating ?? 1.0,
+              minRating: 1,
+              direction: Axis.horizontal,
+              allowHalfRating: true,
+              itemCount: 5,
+              itemSize: 15,
+              itemPadding: const EdgeInsets.symmetric(horizontal: 1.0),
+              itemBuilder: (context, _) => Icon(Icons.star),
+              onRatingUpdate: (rating) {},
             )
           ],
         ),

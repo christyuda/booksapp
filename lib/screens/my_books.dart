@@ -1,4 +1,5 @@
 import 'package:bookapps/screens/book_detail.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +52,8 @@ class MyBooksScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               image: DecorationImage(
-                                image: AssetImage(savedBook.img),
+                                image: CachedNetworkImageProvider(
+                                    savedBook.thumbnail),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -62,7 +64,7 @@ class MyBooksScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                savedBook.name,
+                                savedBook.title,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
@@ -71,7 +73,7 @@ class MyBooksScreen extends StatelessWidget {
                               ),
                               SizedBox(height: 5),
                               Text(
-                                savedBook.author,
+                                savedBook.authors.toString(),
                                 style: TextStyle(
                                   fontSize: 10,
                                   fontWeight: FontWeight.w400,
@@ -82,7 +84,7 @@ class MyBooksScreen extends StatelessWidget {
                               IgnorePointer(
                                 ignoring: true,
                                 child: RatingBar.builder(
-                                  initialRating: savedBook.rating,
+                                  initialRating: savedBook.averageRating,
                                   minRating: 1,
                                   direction: Axis.horizontal,
                                   allowHalfRating: true,

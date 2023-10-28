@@ -1,6 +1,7 @@
 import 'package:bookapps/constant/color_constant.dart';
 import 'package:bookapps/models/book.dart';
 import 'package:bookapps/screens/book_detail.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class RecentlyCell extends StatelessWidget {
@@ -42,10 +43,10 @@ class RecentlyCell extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  book.img,
+                child: CachedNetworkImage(
+                  imageUrl: book.thumbnail,
                   width: media.width * 0.32,
-                  height: media.height * 0.25,
+                  height: media.height * 0.22,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -54,17 +55,17 @@ class RecentlyCell extends StatelessWidget {
               height: 15,
             ),
             Text(
-              book.name,
+              book.title,
               maxLines: 3,
               textAlign: TextAlign.left,
               style: TextStyle(
                 color: TColor.text,
-                fontSize: 15,
+                fontSize: 12,
                 fontWeight: FontWeight.w700,
               ),
             ),
             Text(
-              book.author,
+              book.authors.toString(),
               maxLines: 1,
               textAlign: TextAlign.left,
               style: TextStyle(
