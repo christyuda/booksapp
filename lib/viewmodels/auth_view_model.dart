@@ -1,4 +1,5 @@
 import 'package:bookapps/models/user_model.dart';
+import 'package:bookapps/services/base_url.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,12 +11,11 @@ class AuthViewModel extends ChangeNotifier {
   bool get isLoggedIn => _isLoggedIn;
 
   final Dio dio = Dio();
-  final String baseUrl = 'https://bukukitabe-8ece94dbd6dd.herokuapp.com/api';
 
   Future<bool> login(String email, String password) async {
     try {
       final response = await dio.post(
-        '$baseUrl/login',
+        urlApibooksLogin,
         data: {
           'email': email,
           'password': password,
