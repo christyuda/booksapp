@@ -55,6 +55,7 @@ class MainPage extends StatelessWidget {
                       height: media.width * 0.1,
                     ),
                     AppBar(
+                      leading: null,
                       backgroundColor: Colors.transparent,
                       elevation: 0,
                       title: Row(

@@ -1,11 +1,15 @@
 import 'package:bookapps/provider/book_providers.dart';
 import 'package:bookapps/provider/menu_provider.dart';
 import 'package:bookapps/provider/navigation_provider.dart';
+import 'package:bookapps/provider/register_provider.dart';
 import 'package:bookapps/routes/app_routes.dart';
 import 'package:bookapps/screens/book_detail.dart';
 import 'package:bookapps/screens/home_screen.dart';
+import 'package:bookapps/screens/login_page.dart';
 import 'package:bookapps/screens/my_books.dart';
+import 'package:bookapps/screens/register_page.dart';
 import 'package:bookapps/screens/settings.dart';
+import 'package:bookapps/viewmodels/auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +22,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => AuthViewModel()),
+        ChangeNotifierProvider(create: (context) => RegistrationViewModel()),
         ChangeNotifierProvider<BookProvider>(
           create: (context) => BookProvider(),
         ),
@@ -30,8 +36,10 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Buku ku',
-        initialRoute: AppRoutes.home,
+        initialRoute: AppRoutes.login,
         routes: {
+          AppRoutes.login: (context) => LoginPage(),
+          AppRoutes.register: (context) => RegisterPage(),
           AppRoutes.home: (context) => HomeScreen(),
           AppRoutes.bookDetail: (context) => BookDetailScreen(),
           AppRoutes.myBooks: (context) => MyBooksScreen(),
