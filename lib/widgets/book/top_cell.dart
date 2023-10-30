@@ -12,6 +12,7 @@ class TopPicksCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context).size;
+    final String imageUrl = book.thumbnail;
 
     return GestureDetector(
       onTap: () {
@@ -43,10 +44,12 @@ class TopPicksCell extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: CachedNetworkImage(
-                  imageUrl: book.thumbnail,
+                  imageUrl: imageUrl,
                   width: media.width * 0.32,
                   height: media.width * 0.50,
                   fit: BoxFit.cover,
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),
             ),

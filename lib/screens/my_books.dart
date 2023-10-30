@@ -1,3 +1,4 @@
+import 'package:bookapps/constant/color_constant.dart';
 import 'package:bookapps/screens/book_detail.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,12 @@ class MyBooksScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Koleksi Buku"),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: Text(
+          "Koleksi Buku",
+          style: TextStyle(color: TColor.judulBesar),
+        ),
       ),
       body: SafeArea(
         child: Column(
@@ -42,7 +48,7 @@ class MyBooksScreen extends StatelessWidget {
                     child: Container(
                       margin: EdgeInsets.only(bottom: 19, right: 25, left: 25),
                       height: 81,
-                      width: media.width - 50,
+                      width: media.width * 50,
                       color: Colors.white, // Ganti warna sesuai kebutuhan
                       child: Row(
                         children: <Widget>[
@@ -58,48 +64,62 @@ class MyBooksScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(width: 21),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                savedBook.title,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              SizedBox(height: 5),
-                              Text(
-                                savedBook.authors.toString(),
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              SizedBox(height: 5),
-                              IgnorePointer(
-                                ignoring: true,
-                                child: RatingBar.builder(
-                                  initialRating: savedBook.averageRating,
-                                  minRating: 1,
-                                  direction: Axis.horizontal,
-                                  allowHalfRating: true,
-                                  itemCount: 5,
-                                  itemSize: 15,
-                                  itemPadding: const EdgeInsets.symmetric(
-                                      horizontal: 1.0),
-                                  itemBuilder: (context, _) => Icon(
-                                    Icons.star,
-                                    color: Colors.deepOrange,
+                          SizedBox(width: 20),
+                          Container(
+                            width: media.width * 0.5,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  savedBook.title,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black,
                                   ),
-                                  onRatingUpdate: (rating) {},
                                 ),
-                              ),
-                            ],
+                                SizedBox(height: 5),
+                                Text(
+                                  savedBook.authors.toString(),
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                SizedBox(height: 5),
+                                IgnorePointer(
+                                  ignoring: true,
+                                  child: RatingBar.builder(
+                                    initialRating: savedBook.averageRating,
+                                    minRating: 1,
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemCount: 5,
+                                    itemSize: 15,
+                                    itemPadding: const EdgeInsets.symmetric(
+                                        horizontal: 1.0),
+                                    itemBuilder: (context, _) => Icon(
+                                      Icons.star,
+                                      color: Colors.deepOrange,
+                                    ),
+                                    onRatingUpdate: (rating) {},
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.delete),
+                                  onPressed: () {
+                                    bookProvider.removeBook(
+                                        index); // Hapus buku dari daftar
+                                    bookProvider
+                                        .notifyListeners(); // Memperbarui tampilan
+                                  },
+                                )
+                              ],
+                            ),
                           ),
                         ],
                       ),

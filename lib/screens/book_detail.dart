@@ -4,11 +4,13 @@ import 'package:bookapps/provider/book_providers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 // import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BookDetailScreen extends StatelessWidget {
   final Book? book;
@@ -40,7 +42,20 @@ class BookDetailScreen extends StatelessWidget {
                 borderRadius: 20,
                 borderWidth: 2,
                 borderColor: TColor.primaryLight,
-                onPress: () {},
+                onPress: () async {
+                  final String urllink = book!.previewLink;
+                  final Uri urilink = Uri.parse(urllink);
+
+                  try {
+                    if (await canLaunchUrl(urilink)) {
+                      await launch(urllink.toString());
+                    } else {
+                      print('Could not launch the URL: $urllink');
+                    }
+                  } catch (e) {
+                    print('Error: $e');
+                  }
+                },
               ),
             ),
             Container(
@@ -102,8 +117,9 @@ class BookDetailScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             image: DecorationImage(
-                              image:
-                                  CachedNetworkImageProvider(book!.thumbnail),
+                              image: CachedNetworkImageProvider(
+                                book!.thumbnail,
+                              ),
                             ),
                           ),
                         ),
@@ -135,28 +151,28 @@ class BookDetailScreen extends StatelessWidget {
                             fontWeight: FontWeight.w400),
                       ),
                     ),
-                    // Padding(
-                    //   padding: EdgeInsets.only(top: 7, left: 22),
-                    //   child: Row(
-                    //     children: <Widget>[
-                    //       RatingBar.builder(
-                    //         initialRating: book!.averageRating ?? 1.0,
-                    //         minRating: 1,
-                    //         direction: Axis.horizontal,
-                    //         allowHalfRating: true,
-                    //         itemCount: 5,
-                    //         itemSize: 15,
-                    //         itemPadding:
-                    //             const EdgeInsets.symmetric(horizontal: 1.0),
-                    //         itemBuilder: (context, _) => Icon(Icons.star),
-                    //         onRatingUpdate: (rating) {},
-                    //       ),
-                    //       SizedBox(
-                    //         width: 4,
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 7, left: 22),
+                      child: Row(
+                        children: <Widget>[
+                          RatingBar.builder(
+                            initialRating: book!.averageRating ?? 1.0,
+                            minRating: 1,
+                            direction: Axis.horizontal,
+                            allowHalfRating: true,
+                            itemCount: 5,
+                            itemSize: 15,
+                            itemPadding:
+                                const EdgeInsets.symmetric(horizontal: 1.0),
+                            itemBuilder: (context, _) => Icon(Icons.star),
+                            onRatingUpdate: (rating) {},
+                          ),
+                          SizedBox(
+                            width: 4,
+                          ),
+                        ],
+                      ),
+                    ),
                     Container(
                       height: 28,
                       margin: EdgeInsets.only(top: 23, bottom: 36),

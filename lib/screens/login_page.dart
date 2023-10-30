@@ -1,7 +1,7 @@
 import 'package:bookapps/screens/home_screen.dart';
 import 'package:bookapps/screens/register_page.dart';
 // import 'package:bookapps/screens/tokensave.dart';
-import 'package:bookapps/viewmodels/auth_view_model.dart';
+import 'package:bookapps/provider/auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -129,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 150.0, vertical: 20.0),
+                              horizontal: 145.0, vertical: 20.0),
                           primary: Colors.blue[400],
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15),

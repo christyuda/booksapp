@@ -1,4 +1,4 @@
-import 'package:bookapps/viewmodels/auth_view_model.dart';
+import 'package:bookapps/provider/auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

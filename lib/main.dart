@@ -9,7 +9,7 @@ import 'package:bookapps/screens/login_page.dart';
 import 'package:bookapps/screens/my_books.dart';
 import 'package:bookapps/screens/register_page.dart';
 import 'package:bookapps/screens/settings.dart';
-import 'package:bookapps/viewmodels/auth_view_model.dart';
+import 'package:bookapps/provider/auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

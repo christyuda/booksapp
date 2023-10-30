@@ -17,7 +17,9 @@ class BookProvider with ChangeNotifier {
 
   Future<void> fetchBooks() async {
     try {
-      final urlbase = urlApibooks;
+      final urlbase =
+          'https://bukukitabe-8ece94dbd6dd.herokuapp.com/api/randombooks';
+      ;
       // Fetch Top Picks Books
       topPicksArr = await TopPicksApi().fetchTopPicks(urlbase);
       // Fetch Best Books
@@ -36,6 +38,11 @@ class BookProvider with ChangeNotifier {
   List<Book> savedBooks = [];
   void addToReadingList(Book book) {
     savedBooks.add(book);
+    notifyListeners();
+  }
+
+  void removeBook(int index) {
+    savedBooks.removeAt(index);
     notifyListeners();
   }
 }
