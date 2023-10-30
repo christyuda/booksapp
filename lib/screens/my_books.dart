@@ -47,14 +47,17 @@ class MyBooksScreen extends StatelessWidget {
                     },
                     child: Container(
                       margin: EdgeInsets.only(bottom: 19, right: 25, left: 25),
-                      height: 81,
+                      height: 91,
                       width: media.width * 50,
-                      color: Colors.white, // Ganti warna sesuai kebutuhan
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12)),
+                      // Ganti warna sesuai kebutuhan
                       child: Row(
                         children: <Widget>[
                           Container(
-                            height: 81,
-                            width: 62,
+                            height: 80,
+                            width: 60,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               image: DecorationImage(
@@ -67,57 +70,68 @@ class MyBooksScreen extends StatelessWidget {
                           SizedBox(width: 20),
                           Container(
                             width: media.width * 0.5,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  savedBook.title,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        savedBook.title,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      SizedBox(height: 5),
+                                      Text(
+                                        savedBook.authors.toString(),
+                                        style: TextStyle(
+                                          fontSize: 7,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                      SizedBox(height: 5),
+                                      IgnorePointer(
+                                        ignoring: true,
+                                        child: RatingBar.builder(
+                                          initialRating:
+                                              savedBook.averageRating,
+                                          minRating: 1,
+                                          direction: Axis.horizontal,
+                                          allowHalfRating: true,
+                                          itemCount: 5,
+                                          itemSize: 10,
+                                          itemPadding:
+                                              const EdgeInsets.symmetric(
+                                            horizontal: 1.0,
+                                          ),
+                                          itemBuilder: (context, _) => Icon(
+                                            Icons.star,
+                                            color: Colors.deepOrange,
+                                          ),
+                                          onRatingUpdate: (rating) {},
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                SizedBox(height: 5),
-                                Text(
-                                  savedBook.authors.toString(),
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.grey,
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: IconButton(
+                                    icon: Icon(Icons.delete),
+                                    onPressed: () {
+                                      bookProvider.removeBook(index);
+                                    },
                                   ),
                                 ),
-                                SizedBox(height: 5),
-                                IgnorePointer(
-                                  ignoring: true,
-                                  child: RatingBar.builder(
-                                    initialRating: savedBook.averageRating,
-                                    minRating: 1,
-                                    direction: Axis.horizontal,
-                                    allowHalfRating: true,
-                                    itemCount: 5,
-                                    itemSize: 15,
-                                    itemPadding: const EdgeInsets.symmetric(
-                                        horizontal: 1.0),
-                                    itemBuilder: (context, _) => Icon(
-                                      Icons.star,
-                                      color: Colors.deepOrange,
-                                    ),
-                                    onRatingUpdate: (rating) {},
-                                  ),
-                                ),
-                                IconButton(
-                                  icon: Icon(Icons.delete),
-                                  onPressed: () {
-                                    bookProvider.removeBook(
-                                        index); // Hapus buku dari daftar
-                                    bookProvider
-                                        .notifyListeners(); // Memperbarui tampilan
-                                  },
-                                )
                               ],
                             ),
                           ),
