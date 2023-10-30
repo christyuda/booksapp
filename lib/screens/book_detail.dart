@@ -117,8 +117,9 @@ class BookDetailScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             image: DecorationImage(
-                              image:
-                                  CachedNetworkImageProvider(book!.thumbnail),
+                              image: CachedNetworkImageProvider(
+                                book!.thumbnail,
+                              ),
                             ),
                           ),
                         ),

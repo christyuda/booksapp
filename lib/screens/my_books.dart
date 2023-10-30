@@ -109,6 +109,15 @@ class MyBooksScreen extends StatelessWidget {
                                     onRatingUpdate: (rating) {},
                                   ),
                                 ),
+                                IconButton(
+                                  icon: Icon(Icons.delete),
+                                  onPressed: () {
+                                    bookProvider.removeBook(
+                                        index); // Hapus buku dari daftar
+                                    bookProvider
+                                        .notifyListeners(); // Memperbarui tampilan
+                                  },
+                                )
                               ],
                             ),
                           ),

@@ -29,6 +29,8 @@ class GenresCell extends StatelessWidget {
             width: media.width * 0.7,
             height: media.width * 0.25,
             fit: BoxFit.fitWidth,
+            placeholder: (context, url) => CircularProgressIndicator(),
+            errorWidget: (context, url, error) => Icon(Icons.error),
           ),
           const SizedBox(
             height: 15,

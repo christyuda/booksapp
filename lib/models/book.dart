@@ -50,9 +50,14 @@ class Book {
       description: json['description'],
       smallThumbnail: json['smallThumbnail'],
       thumbnail: json['thumbnail'],
-      previewLink: json['previewLink'],
+      previewLink: cleanhttp(json['previewLink']),
       categories: List<String>.from(json['categories']),
       averageRating: double.tryParse(json['averageRating'].toString()) ?? 0.0,
     );
+  }
+
+  static String cleanhttp(String url) {
+    final uri = Uri.parse(url);
+    return uri.origin + uri.path;
   }
 }

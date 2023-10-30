@@ -16,10 +16,14 @@
             <action android:name="android.support.customtabs.action.CustomTabsService" />
         </intent>
         </queries>
+        <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:label="bookapps"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true">
+        
         <activity
             android:name=".MainActivity"
             android:exported="true"

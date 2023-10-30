@@ -1,7 +1,7 @@
 import 'package:bookapps/screens/home_screen.dart';
 import 'package:bookapps/screens/register_page.dart';
 // import 'package:bookapps/screens/tokensave.dart';
-import 'package:bookapps/viewmodels/auth_view_model.dart';
+import 'package:bookapps/provider/auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';

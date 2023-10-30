@@ -16,12 +16,7 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(
           elevation: 0,
           backgroundColor: Color.fromARGB(0, 0, 0, 0),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          )),
+          leading: null),
       backgroundColor: Colors.grey[300],
       body: SingleChildScrollView(
         child: Center(

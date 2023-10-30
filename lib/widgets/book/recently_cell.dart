@@ -48,6 +48,8 @@ class RecentlyCell extends StatelessWidget {
                   width: media.width * 0.32,
                   height: media.height * 0.22,
                   fit: BoxFit.cover,
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),
             ),
