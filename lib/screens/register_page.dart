@@ -49,6 +49,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          elevation: 0,
           backgroundColor: Colors.transparent,
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
@@ -176,7 +177,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
                 style: ElevatedButton.styleFrom(
                   padding:
-                      EdgeInsets.symmetric(horizontal: 150.0, vertical: 20.0),
+                      EdgeInsets.symmetric(horizontal: 145.0, vertical: 20.0),
 
                   primary: Colors.blue[400], // Warna latar belakang tombol
                   shape: RoundedRectangleBorder(
