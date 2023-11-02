@@ -156,7 +156,7 @@ class BookDetailScreen extends StatelessWidget {
                       child: Row(
                         children: <Widget>[
                           RatingBar.builder(
-                            initialRating: book!.averageRating ?? 1.0,
+                            initialRating: book!.averageRating,
                             minRating: 1,
                             direction: Axis.horizontal,
                             allowHalfRating: true,

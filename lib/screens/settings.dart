@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quickalert/models/quickalert_type.dart';
-import 'package:quickalert/widgets/quickalert_dialog.dart';
+// import 'package:quickalert/models/quickalert_type.dart';
+// import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 class SettingsScreen extends StatelessWidget {
-  @override
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
