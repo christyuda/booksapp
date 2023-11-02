@@ -1,10 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:bookapps/provider/auth_view_model.dart';
 import 'package:bookapps/screens/home_screen.dart';
 import 'package:bookapps/screens/register_page.dart';
-// import 'package:bookapps/screens/tokensave.dart';
-import 'package:bookapps/provider/auth_view_model.dart';
-import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,8 +13,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -55,48 +56,50 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 50,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: TextField(
-                        controller: emailController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Email',
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                        child: TextFormField(
+                          controller: emailController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Email',
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Email harus diisi';
+                            }
+                            if (!isValidEmail(value)) {
+                              return 'Email tidak valid';
+                            }
+                            return null;
+                          },
                         ),
                       ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: TextField(
-                        controller: passwordController,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Password',
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                        child: TextFormField(
+                          controller: passwordController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Password',
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Password harus diisi';
+                            }
+                            return null;
+                          },
                         ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
                 SizedBox(
@@ -107,25 +110,30 @@ class _LoginPageState extends State<LoginPage> {
                     return Center(
                       child: ElevatedButton(
                         onPressed: () {
-                          final email = emailController.text;
-                          final password = passwordController.text;
-                          auth.login(email, password).then((loggedIn) {
-                            if (loggedIn) {
-                              Navigator.of(context).pushAndRemoveUntil(
+                          if (_formKey.currentState!.validate()) {
+                            final email = emailController.text;
+                            final password = passwordController.text;
+                            auth.login(email, password).then((loggedIn) {
+                              if (loggedIn) {
+                                Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
-                                builder: (context) {
-                                  return HomeScreen();
-                                },
-                              ), (route) => false);
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                      'Login gagal. Periksa email dan password Anda.'),
-                                ),
-                              );
-                            }
-                          });
+                                    builder: (context) {
+                                      return HomeScreen();
+                                    },
+                                  ),
+                                  (route) => false,
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Login gagal. Periksa email dan password Anda.',
+                                    ),
+                                  ),
+                                );
+                              }
+                            });
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(
@@ -181,5 +189,10 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  bool isValidEmail(String email) {
+    final emailRegExp = RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$');
+    return emailRegExp.hasMatch(email);
   }
 }
